@@ -1,0 +1,131 @@
+PositionPivot ( 0, 250, 0)
+
+rrr=entityvisible(pivot)
+i=i+20
+if i>360
+   i=0
+endif
+ScanRadar(i)
+
+;-------------------------------
+if bulletbonus<>0 
+  if bul_b%=0  
+   bul_b%=bulletbonus 
+  endif
+endif
+;-------------------------------
+if rocketbonus<>0
+  if roc_b%=0  
+   roc_b%=rocketbonus 
+  endif
+endif
+;-------------------------------
+if RepairBonus<>0
+  if Rep_b%=0  
+   Rep_b%=RepairBonus 
+  endif
+endif
+
+;-------------------------------
+Gbul=0
+if bullets<20                         ; если у нас мало патронов
+if bul_b%<>0                       ; если в переменной есть бонус
+  TurnCorpus=deltayaw(corpus%,bul_b%) ; поворачиваем бот на бонус
+  Gbul=1
+endif
+endif
+;-------------------------------
+if rockets=0                          ; если у нас нет ракет 
+if roc_b%<>0                       
+  TurnCorpus=deltayaw(corpus%,roc_b%) 
+endif
+endif
+;-------------------------------
+if Mylives<8                          ; если наш бот сильно поврежден
+if Rep_b%<>0                       
+  TurnCorpus=deltayaw(corpus%,Rep_b%) 
+endif
+endif
+
+
+if enemy<>0     ; Если радар нашел врага                           
+  if target%=0  ; Если наша переменная цели равна 0
+   target%=enemy   ; Заносим врага в цель
+  else
+    dist_t=EntityDistance(corpus%,target)
+    if  dist_t>EntityDistance(corpus%,enemy)
+     target%=enemy
+    endif
+  endif
+endif
+
+if (target<>0) and ((bullets>0)or  (rockets>0))
+   dist_t=EntityDistance(corpus%,target)                    
+  ;-----------------------------------
+    visibl= entityvisible(target) 
+    if (dist_t<1000)and (visibl=1)
+     TurnCorpus=deltayaw(corpus%,target)+90
+    else
+      TurnCorpus=deltayaw(corpus%,target)
+    endif    
+  ;----------------------------------
+   ; 
+  ppr=dist_t#/800                       ;
+   turnturret=deltayaw(turret,target)   
+   if abs(turnturret)<10                ; 
+     turngun=deltapitch(gun,target)-ppr ;
+        if abs(turngun)<2 
+        if (dist_t<1500) and (visibl=1)
+         fire1=1
+        endif
+        endif
+   endif
+
+   if rockets>0                          ; 
+     if dist_t>500                       ; 
+      TurnCorpus=deltayaw(corpus%,target);
+     endif
+   endif
+
+   if (dist_t<600) and (visibl=1)                         ;
+     fire2=1                             ; 
+   endif
+endif
+
+ScanRadar(corpusyaw)              ;в переменной corpusyaw у нас содержится текущий угол бота по оси У
+ if (Obstacle>0) and (Obstacle<400);переменные Obstacle содержит расстояние до препятствия, если оно есть
+     Turn_C=20                     ; наша переменная принимает значение если расстояние меньше 40 метров, назовем ее счетчик
+      oba=ObsAngle                 ; в переменную oba запоминаем угол с этим препятствием относительно бота
+   endif
+;----------------------выполняем маневр
+if Turn_C>0         ; если счетчик больше 0
+   Turn_C=Turn_C-1  ; уменьшаем счетчик
+   TurnCorpus=oba   ;бот будет поворачиваться соответственно с углом между препятствием и ботом
+endif
+
+move=1  ; двигаем бота
+;---------------------------------
+if CollidedObstacle%<>0
+ if (turn_b1=0)and(turn_b2=0)
+  turn_b1=30
+ endif
+endif
+
+if turn_b1>0
+   turn_b1=turn_b1-1
+   if turn_b1=0
+      turn_b2=50
+   endif
+move=-1
+  if turn_b1<30
+   TurnCorpus=-1
+  endif
+endif
+
+if turn_b2>0
+   turn_b2=turn_b2-1
+   move=1
+   TurnCorpus=1
+endif
+;================================
+

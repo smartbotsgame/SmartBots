@@ -1,0 +1,110 @@
+i = i + 20 
+If i > 360 
+i = 0 
+EndIf 
+ScanRadar(i) 
+
+;------------------------------- 
+If BulletBonus <> 0 
+If bul_b% = 0 
+bul_b% = BulletBonus 
+EndIf 
+EndIf 
+;------------------------------- 
+If RocketBonus <> 0 
+If roc_b% = 0 
+roc_b% = RocketBonus 
+EndIf 
+EndIf 
+;------------------------------- 
+If RepairBonus <> 0 
+If rep_b% = 0 
+rep_b% = RepairBonus 
+EndIf 
+EndIf 
+
+;------------------------------- 
+If Bullets < 10 ; если у нас мало патронов 
+If bul_b% <> 0 ; если в переменной есть бонус 
+TurnCorpus = DeltaYaw ( Corpus , bul_b% ) ; поворачиваем бот на бонус 
+EndIf 
+EndIf 
+;------------------------------- 
+If Rockets = 0 ; если у нас нет ракет 
+If roc_b% <> 0 
+TurnCorpus = DeltaYaw ( Corpus ,roc_b% ) 
+EndIf 
+EndIf 
+;------------------------------- 
+If MyLives < 5 ; если наш бот сильно поврежден 
+If rep_b% <> 0 
+TurnCorpus = DeltaYaw ( Corpus , rep_b% ) 
+EndIf 
+EndIf 
+
+
+If Enemy <> 0 ; если радар нашел врага 
+If target% = 0 ; если наша переменная цели равна 0 
+target% = Enemy ; заносим врага в цель 
+EndIf 
+EndIf 
+
+If target <> 0 
+dist_t = EntityDistance ( Corpus , target ) 
+ppr = dist_t# / 800 
+TurnTurret = DeltaYaw ( Turret , target ) 
+If abs ( TurnTurret ) < 10 
+TurnGun = DeltaPitch ( Gun , target ) - ppr 
+If abs ( TurnGun ) < 2 
+Fire1 = 1 
+EndIf 
+EndIf 
+
+If rockets > 0 
+If dist_t > 500 
+TurnCorpus = DeltaYaw ( Corpus , target ) 
+EndIf 
+EndIf 
+
+If dist_t < 600 
+Fire2 = 1 
+EndIf 
+EndIf 
+
+ScanRadar ( CorpusYaw ) ;в переменной corpusyaw у нас содержится текущий угол бота по оси у 
+If ( Obstacle > 0 ) And ( Obstacle < 400 ) ; переменные obstacle содержит расстояние до препятствия, если оно есть 
+turn_c = 20 ; наша переменная принимает значение если расстояние меньше 40 метров, назовем ее счетчик 
+oba = ObsAngle ; в переменную oba запоминаем угол с этим препятствием относительно бота 
+EndIf 
+;----------------------выполняем маневр 
+If turn_c > 0 ; если счетчик больше 0 
+turn_c = turn_c - 1 ; уменьшаем счетчик 
+TurnCorpus = oba ;бот будет поворачиваться соответственно с углом между препятствием и ботом 
+EndIf 
+
+move=1 ; двигаем бота 
+;--------------------------------- 
+If CollidedObstacle<>0 
+If (turn_b1 = 0) And (turn_b2 = 0) 
+turn_b1 = 60 
+EndIf 
+EndIf 
+
+If turn_b1 > 0 
+turn_b1 = turn_b1 - 1 
+If turn_b1 = 0 
+turn_b2 = 50 
+EndIf 
+Move = -1 
+If turn_b1 < 40 
+TurnCorpus = -1 
+EndIf 
+EndIf 
+
+If turn_b2 > 0 
+turn_b2 = turn_b2 - 1 
+Move = 1 
+TurnCorpus = 1 
+EndIf 
+;================================ 
+
