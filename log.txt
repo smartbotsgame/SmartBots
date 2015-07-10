@@ -1,5 +1,0 @@
-Game started 15:54:53
-LoadRobot Car
-LoadRobot Car
-LoadRobot Car
-LoadRobot Car

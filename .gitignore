@@ -5,3 +5,9 @@
 # Windows
 
 Thumbs.db
+
+# Game
+
+log/*
+log.txt
+screens/*
