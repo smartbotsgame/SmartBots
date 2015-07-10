@@ -1,0 +1,6 @@
+table.function {border-width:2; border-style:solid; border-color:#000000;margin-top:15;margin-bottom:15;}
+table.code {background-color:#335588;margin-top:10;margin-bottom:10;border-width:1; border-style:solid; border-color:#FFFF00;}
+td.content {border-width:1; border-style:solid; border-color:#777777;}
+.c {color:#FFFFFF;font-weight:normal;font-family:courier;font-size:14;}
+.m {color:#FFFF00;font-weight:normal;}
+.r {color:#AAFFFF;font-weight:normal;}

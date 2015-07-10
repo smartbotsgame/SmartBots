@@ -1,0 +1,164 @@
+<html>
+
+<head>
+  <title>SmartBots::Documentation</title>
+  <LINK REL="Stylesheet" HREF="tutors/style.css" TYPE="text/css">
+</head>
+
+<style>
+b.title {
+        font-weight:bold;
+        font-size:16;
+        }
+</style>
+
+<body>
+<a name="vars"><h3>Переменные</h3></a>
+<b class="title">Есть 2 типа данных:</b><br>
+- Указатели - в них хранится адрес объекта (бот, дерево, строение, и т.д.)<br>
+- Числа - в них хранится какое-либо число, может принимать как целые, так и дробные значения.<br>
+<br>
+<b class="title">Правила объявления переменных:</b><br>
+- Указатели :  var_name%<br>
+- Числа     : var_name#<br>
+<br>
+При <u>первом</u> объявлении переменной следует указать ее тип.
+По умолчанию тип является числовым. Т.е. строки<br>
+<table class='code' width='100%'><tR><td>
+<b class=c>var_name = value</b><b class=m> ; т.к. явно не указан тип, то переменная автоматически становится числом</b><br>
+<b class=c>var_name# = value</b><b class=m> ; здесь явно указан тип переменной - числовой</b>
+</td></tr></table>
+абсолютно идентичны.<br><br>
+Указывать тип переменной можно только один раз, далее ее тип будет определяться автоматически :<br>
+<table class='code' width='100%'><tR><td>
+<b class=c>
+entity% = 0<b class=m> ; явно указываем тип переменной - указатель</b><br>
+<b class=r>If</b> entity <> <b class=r>Enemy</b><b class=m> ; здесь не указываем тип, он определяется по ранее объявленному</b><br>
+...<br>
+<b class=r>End If</b>
+</b>
+</td></tr></table>
+<br>
+<a name="ops"><hr></a>
+<h3>Операторы</h3>
+<b class="title">- Оператор присваивания: "="</b><br>
+<table class='code' width='100%'><tR><td>
+<b class=c>var_name = value<b class=m> ; значение value заносится в переменную var_name<br></b>
+</b>
+</td></tr></table>
+<br>
+<b class="title">- Арифметические операторы: "+", "-", "/", "*", "Mod" ;<br></b>
+<table class='code' width='100%'><tR><td>
+<b class=c>var_name = value1 + value2 * ( value3 / value4 )</br>
+</td></tr></table>
+<br>
+<b class="title">- Условные операторы: "<", ">", "=", "<=", ">=", "<>", "And", "Or", "Not", "Xor" ;<br></b>
+<br>
+<b class="title">Приоритет операторов :</b>
+<table border=1>
+<tr><td width=200><b>Операторы</b></td><td width=100><b>Приоритет</b></td></tr>
+<tr><td><b>Not</b>, унарный минус</td><td>Самый высокий</td></tr>
+<tr><td><b>And</b>, <b>Or</b>, <b>Xor</b></td><td>-</td></tr>
+<tr><td> *, /</td><td>-</td></tr>
+<tr><td> +, -</td><td>-</td></tr>
+<tr><td> =, <, >, <=, >=, <></td><td>Самый низкий</td></tr>
+</table>
+<br>
+<br><a name="exp"><hr></a>
+<h3>Условия</h3><br>
+<b class="title">Синтаксис:</b><br>
+<br>
+<table border=1>
+<tr><td align="center">
+Вариант №1
+</td><td align="center">Вариант №2</td>
+<tr><td width=200>
+<table class='code' width='100%'><tR><td>
+<b class=c>
+<b class=r>If</b> ...<br>
+   ...<br>
+[<b class=r>Else</b>]<br>
+   [...]<br>
+<b class=r>EndIf</b>
+</b></td></tr></table>
+</td>
+<td width=200>
+<table class='code' width='100%'><tR><td>
+<b class=c>
+<b class=r>If</b> ...<br>
+   ...<br>
+[<b class=r>Else</b>]<br>
+   [...]<br>
+<b class=r>End If</b>
+</b></td></tr></table>
+</td></tr>
+</table>
+<br>Возможна запись в одну строчку:<br>
+<table class='code' width='100%'><tR><td>
+<b class=c>
+<b class=r>If</b> ...  ... [<b class=r>Else</b>  ... ]  <b class=r>EndIf</b></b>
+</td></tr></table>
+Пример :<br>
+<table class='code' width='100%'><tR><td>
+<b class=c>
+<b class=r>If</b>  a>b   MaxValue=a   <b class=r>Else</b>   MaxValue=b   <b class=r>EndIf</b>
+</b></td></tr></table>
+
+<br><a name="intvars"><hr></a>
+<h3>Встроенные переменные</h3>
+<b class="title">Переменные, устанавливаемые функцией ScanRadar</b><br>
+- <b>Friend</b> - указатель на союзника (при командной игре), попавшего в сектор сканирования.<br>
+- <b>Enemy</b> - указатель на врага, попавшего в сектор сканирования<br>
+- <b>BulletBonus</b> - указатель на бонус снарядов, попавшего в сектор сканирования.<br>
+- <b>RocketBonus</b> - указатель на бонус ракеты, попавшего в сектор сканирования.<br>
+- <b>RepairBonus</b> - указатель на бонус ремонта, попавшего в сектор сканирования.<br>
+- <b>Obstacle</b> - расстояние до препятствия, попавшего под "главный луч".<br>
+- <b>ObsAngle</b> - угол с препятствием, попавшим  под "главный луч".<br>
+<br>
+<b class="title">Жизни, снаряды, ракеты</b><br>
+- <b>MyLives</b> - жизни своего бота.<br>
+- <b>Bullets</b> - количество оставшихся снарядов.<br>
+- <b>Rockets</b> - количество оставшихся ракет.<br>
+<br>
+<b class="title">Тип игры, количество ботов, и еще одна фишка</b><br>
+- <b>TypeGame</b> - тип игры : 1 - каждый сам за себя; 2 - командный бой.<br>
+- <b>HowManyBots</b> - количество ботов в игре.<br>
+- <b>DamageYaw</b> - индикатор повреждения, содержит угол попавшего снаряда (относительно корпуса бота), если не было повреждения - 0.<br>
+<br>
+<b class="title">Управление своим ботом</b><br>
+- <b>TurnCorpus</b> - указывает направление поворота корпуса танка : +1 - налево, +0.5 - на половину угла поворота налево, -1 - направо.<br>
+- <b>TurnGun</b> - указывает направление поднятия/опускания ствола. +1 - вверх, +0.5 - на половину угла вверх, -1 - вниз.<br>
+- <b>TurnTurret</b> - указывает направление поворота башни : +1 - налево, +0.5 - на половину угла поворота налево, -1 - направо.<br>
+- <b>Move</b> - указывает ускорение движения : +1-полный вперед, 0 - стоять, -1 - полный назад.<br>
+- <b>Fire1</b> - указывает на команду запуска снаряда : 1 - огонь, 0 - не стрелять.<br>
+- <b>Fire2</b> - указывает на команду запуска ракеты : 1 - огонь, 0 - не стрелять.<br>
+<br>
+<b class="title">Обработка столкновений</b><br>
+- <b>Collided</b> - указатель на бота, с которым произошло столкновение.<br>
+- <b>CollidedObstacle</b> - указатель на препятствие, с которым произошло столкновение.<br>
+<br>
+<b class="title">Указатели на модели</b><br>
+- <b>Radar</b> - указатель на радар.<br>
+- <b>Turret</b> - указатель на башню.<br>
+- <b>Gun</b> - указатель на ствол.<br>
+- <b>Corpus</b> - указатель на корпус танка.<br>
+- <b>Center</b> - указатель на геометрический центр территории.<br>
+- <b>Pivot</b> - указатель на вспомогательный виртуальный объект.<br>
+<br>
+<b class="title">Работа со стволом</b><br>
+- <b>GunPitch</b> - угол поворота ствола по оси X.<br>
+<br>
+<b class="title">Работа с башней</b><br>
+- <b>TurretYaw</b> - угол поворота башни по оси Y.<br>
+<br>
+<b class="title">Работа с корпусом танка</b><br>
+- <b>CorpusX</b> - координата корпуса танка по оси X.<br>
+- <b>CorpusY</b> - координата корпуса танка по оси Y.<br>
+- <b>CorpusZ</b> - координата корпуса танка по оси Z.<br>
+- <b>CorpusPitch</b> - угол корпуса танка по оси X.<br>
+- <b>CorpusYaw</b> - угол корпуса танка по оси Y.<br>
+- <b>CorpusRoll</b> - угол корпуса танка по оси Z.<br>
+<br>
+</body>
+
+</html>

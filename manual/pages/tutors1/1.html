@@ -1,0 +1,192 @@
+<html>
+<head>
+<title>Урок 1</title>
+  <LINK REL="Stylesheet" HREF="style.css" TYPE="text/css">
+</head>
+<body>
+<h2>Урок 1.</h2>
+<h3>Управляем ботом</h3>
+Для управления собственным ботом введено несколько переменных :<br>
+<table class='function' width='100%'>
+<tr><td class=content><b>Move</b></td></tr>
+<tr><td class=content>переменная, с помощью которой задается скорость движения бота.<br>
+<table width=100% class=code><tR><td>
+<b class=c><b class=r>Move</b> = 1 <b class=m> ; двигать бота с максимальной скоростью вперед</b></b>
+</td></tr></table>
+<table width=100% class=code><tR><td>
+<b class=c><b class=r>Move</b> = -.5 <b class=m> ; двигать бота в пол-скорости назад</b></b>
+</td></tr></table>
+</table>
+<table class='function' width='100%'>
+<tr><td class=content><b>TurnCorpus</b></td></tr>
+<tr><td class=content>переменная, с помощью которой задается направление поворота бота :<br>
+<table width=100% class=code><tR><td>
+<b class=c><b class=r>TurnCorpus</b> = 1 <b class=m> ; повернуть бота налево на максимальный угол</b></b>
+</td></tr></table>
+<table width=100% class=code><tR><td>
+<b class=c><b class=r>TurnCorpus</b> = -1/4 <b class=m> ; повернуть бота направо на четверть максимального угла</b></b>
+</td></tr></table>
+</td></tr>
+</table>
+<table class='function' width='100%'>
+<tr><td class=content><b>TurnTurret</b></td></tr>
+<tr><td class=content>переменная, с помощью которой задается направление поворота пушки :<br>
+<img src='../turret.JPG'>
+<table width=100% class=code><tR><td>
+<b class=c><b class=r>TurnTurret</b> = 1 <b class=m> ; повернуть пушку налево на максимальный угол</b></b>
+</td></tr></table>
+<table width=100% class=code><tR><td>
+<b class=c><b class=r>TurnTurret</b> = -1/4 <b class=m> ; повернуть пушку направо на четверть максимального угла</b></b>
+</td></tr></table>
+</td></tr></table>
+<table class='function' width='100%'>
+<tr><td class=content><b>TurnGun</b></td></tr>
+<tr><td class=content>переменная, с помощью которой задается направление поднятия/опускания ствола пушки :<br>
+<img src='../turret.JPG'>
+<table width=100% class=code><tR><td>
+<b class=c><b class=r>TurnGun</b> = 1 <b class=m> ; поднять ствол на максимальный угол</b></b>
+</td></tr></table>
+<table width=100% class=code><tR><td>
+<b class=c><b class=r>TurnGun</b> = -1/3 <b class=m> ; опустить ствол на треть максимального угла</b></b>
+</td></tr></table>
+</td></tr>
+</table>
+<table class='function' width='100%'>
+<tr><td class=content><b>Fire1</b></td></tr>
+<tr><td class=content>переменная запуска снаряда :<br>
+<table width=100% class=code>
+<tr><td>
+<b class=c><b class=r>Fire1</b> = 0 <b class=m>; не запускать снаряд</b></b>
+</td></tr></table>
+<table width=100% class=code>
+<tr><td>
+<b class=c><b class=r>Fire1</b> = 1 <b class=m>; запустить снаряд</b></b>
+</td></tr></table>
+</td></tr>
+</table>
+<table class='function' width='100%'>
+<tr><td class=content><b>Fire2</b></td></tr>
+<tr><td class=content>переменная запуска самонаводящейся ракеты :<br>
+<table width=100% class=code>
+<tr><td>
+<b class=c><b class=r>Fire2</b> = 0 <b class=m>; не запускать самонаводящуюся ракету</b></b>
+</td></tr></table>
+<table width=100% class=code>
+<tr><td>
+<b class=c><b class=r>Fire2</b> = 1 <b class=m>; запустить самонаводящуюся ракету</b></b>
+</td></tr></table>
+</td></tr>
+</table>
+Теперь попробуем применить наши знания на практике.<BR>
+<br>
+<br>
+<h3>Движемся по кругу</h3>
+<table width=100% class=code>
+<tR><td>
+<b class=c>
+<b class=r>Move</b> = 1 <b class=m> ; двигаемся вперед с максимальной скоростью</b><br>
+<b class=r>TurnCorpus</b> = 1 <b class=m> ; поворачиваемся налево на максимальный угол</b>
+</b>
+</td></tr>
+</table>
+Ясно, что на ровной поверхности без препятствий бот будет двигаться по окружности, но если на уровне будут препятствия, то бот будет на них натыкаться, иногда застревать.<br>
+<br>
+<br>
+<h3>Используем радар</h3>
+В <a href='0.html'>Уроке 0</a> мы узнали что такое радар и как им пользоваться.<br>
+<table width=100% class=code><tr><td>
+<b class=c>
+<b class=r>Move</b> = 1<br>
+<b class=r>TurnCorpus</b> = 1<br>
+<br>
+angle = angle + 20 <b class=m> ; эта переменная указывает угол сканирования</b><br>
+<b class=r>ScanRadar</b> ( angle ) <b class=m> ; сканируем пространство под углом angle</b><br>
+</b>
+</td></tr></table>
+Если запустить этот код, то бот опять будет двигаться по кругу. Что же тогда изменилось? Теперь бот "видит" окружающие его объекты, и мы можем написать некий анализатор, который находит врага :
+<table width=100% class=code><tr><td>
+<b class=c>
+<b class=r>Move</b> = 1<br>
+<b class=r>TurnCorpus</b> = 1<br>
+<br>
+angle = angle + 20<br>
+<b class=r>ScanRadar</b> ( angle )<br>
+<br>
+<b class=r>If</b> (<b class=r>Enemy</b> <> 0) <b class=r>And</b> (target% = 0) <b class=m> ; если враг существует, и переменная target пуста</b><br>
+&nbsp; target = <b class=r>Enemy</b> <b class=m>; "запоминаем" врага, теперь переменная target не пуста</b><br>
+<b class=r>EndIf</b><br>
+</b>
+</td></tr></table>
+Если бот засек врага и переменная <b>target</b> пуста ( равняется нулю ), то мы заносим указатель врага в переменную <b>target</b>, и тогда при следующем проходе нам не надо будет заново искать врага. Если враг был уничтожен, то все указатели на него обнуляются.<br>
+<br>
+<br>
+<h3>Стреляем</h3>
+Стрельба осуществляется, как мы знаем, посредством применения переменных <b>Fire1</b> и <b>Fire2</b> :
+<table width=100% class=code><tr><td>
+<b class=c>
+<b class=r>Move</b> = 1<br>
+<b class=r>TurnCorpus</b> = 1<br>
+<br>
+angle = angle + 20<br>
+<b class=r>ScanRadar</b> ( angle )<br>
+<br>
+<b class=r>If</b> (<b class=r>Enemy</b> <> 0) <b class=r>And</b> (target% = 0) &nbsp; target = <b class=r>Enemy</b> &nbsp; <b class=r>EndIf</b><br>
+<br>
+<b class=r>If</b> target <> 0 <b class=m> ; если враг существует</b><br>
+&nbsp; <b class=r>TurnTurret</b> = <b class=r>DeltaYaw</b> ( <b class=r>Turret</b>, target ) <b class=m>; поворачиваем пушку на врага</b><br>
+&nbsp; <b class=r>TurnGun</b> = <b class=r>DeltaPitch</b> ( <b class=r>Gun</b>, target ) <b class=m>; поворачиваем ствол на врага</b><br>
+&nbsp; <b class=r>Fire1</b> = 1 <b class=m> ; пли!</b><br>
+<b class=r>End If</b><br>
+</b>
+</td></tr></table>
+В приведенном коде мы использовали 2 очень полезные функции :
+<table width=100% class=function>
+<tr><td class=content><b>DeltaYaw (</b> <i>src_entity%, dest_entity%</i> <b>)</b></td></tr>
+<tr><td class=content>
+угол, на который надо повернуть объект <i>src_entity</i> по оси OY, чтобы направить его на <i>dest_entity</i>.<br>
+<table width=100% class=function>
+<tr>
+<td><img src='../deltayaw.JPG'></td>
+<td>На рисунке <i>src_entity</i> - бот, движущийся вверх, <i>dest_entity</i> - некий объект.<br>
+Функция <b>DeltaYaw</b> возвращает угол "фи".</td>
+</tr>
+</table>
+</td></tr>
+</table>
+<table width=100% class=function>
+<tr><td class=content><b>DeltaPitch (</b> <i>src_entity%, dest_entity%</i> <b>)</b></td></tr>
+<tr><td class=content>
+угол, на который надо повернуть объект <i>src_entity</i> по оси OX, чтобы направить его на <i>dest_entity</i>.<br>
+<table width=100% class=function>
+<tr>
+<td><img src='../deltapitch.JPG'></td>
+<td>На рисунке <i>src_entity</i> - это ствол бота, <i>dest_entity</i> - некий объект.<bR>
+Функция <b>DeltaPitch</b> возвращает угол "лямбда".</td>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+Запустив предыдущий код, вы увидите, что бот, найдя врага, сразу же начинает палить. Но, если пушка отвернута от врага, то снаряды полетят зря, а их количество ограничено!<br>
+Напишем код, который будет экономить снаряды :
+<table width=100% class=code><tr><td>
+<b class=c>
+<b class=r>Move</b> = 1<br>
+<b class=r>TurnCorpus</b> = 1<br>
+<br>
+angle = angle + 20<br>
+<b class=r>ScanRadar</b> ( angle )<br>
+<br>
+<b class=r>If</b> (<b class=r>Enemy</b> <> 0) <b class=r>And</b> (target% = 0) &nbsp; target = <b class=r>Enemy</b> &nbsp; <b class=r>EndIf</b><br>
+<br>
+<b class=r>If</b> target <> 0 <b class=m> ; если враг существует</b><br>
+&nbsp; <b class=r>TurnTurret</b> = <b class=r>DeltaYaw</b> ( <b class=r>Turret</b>, target )<br>
+&nbsp; <b class=r>TurnGun</b> = <b class=r>DeltaPitch</b> ( <b class=r>Gun</b>, target )<br>
+&nbsp; <b class=r>If Abs</b> ( <b class=r>DeltaYaw</b>(<b class=r>Turret</b>, target) ) < 6<b class=m> ; если ствол "почти" направлен на врага</b><br>
+&nbsp; &nbsp; <b class=r>Fire1</b> = 1 <b class=m>; пли!</b><br>
+&nbsp; <b class=r>EndIf</b><br>
+<b class=r>End If</b><br>
+</b>
+</td></tr></table><br>
+Надеюсь, пояснять добавленные строки не надо? <b>:)</b>
+<br><bR>

@@ -1,0 +1,68 @@
+<html>
+<head>
+<title>Урок 3</title>
+</head>
+<style>
+.c {color:#FFFFFF;font-weight:normal;font-family:courier;font-size:14;}
+.m {color:#FFFF00;font-weight:normal;}
+.r {color:#AAFFFF;font-weight:normal;}
+</style>
+<body>
+<h2>Урок 3 ( ищем и собираем бонусы ).</h2>
+<h3>Ищем бонусы</h3>
+Cканирование местности мы уже сделали в предудущем уроке, поэтому будем использовать его результаты.<br>
+Используем переменные <i>BulletBonus</i>, <i>RocketBonus</i> и <i>RepairBonus</i>. Запомним их значения в собственные переменные, если они не равны 0 ( т.е. если бонусы вообще были засечены ).<br>
+<br>
+<table bgColor='#335588' width='100%'><tr><td>
+<b class=c>
+ <b class='m'>;------------------------------- </b><br>
+ <b class='r'>If</b> BulletBonus <> 0 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<b class='m'>; если радар нашел бонус </b><br>
+ &nbsp; <b class='r'>If</b> bul_b% = 0 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<b class='m'>; если наша переменная для бонуса равна 0 </b><br>
+ &nbsp; &nbsp;bul_b% = BulletBonus &nbsp; &nbsp; &nbsp;<b class='m'>; заносим бонус в переменную </b><br>
+ &nbsp; <b class='r'>EndIf</b> <br>
+ <b class='r'>EndIf</b> <br>
+ <b class='m'>;------------------------------- </b><br>
+ <b class='r'>If</b> RocketBonus <> 0 <br>
+ &nbsp; <b class='r'>If</b> roc_b% = 0 <br>
+ &nbsp; &nbsp;roc_b% = RocketBonus <br>
+ &nbsp; <b class='r'>EndIf</b> <br>
+ <b class='r'>EndIf</b> <br>
+ <b class='m'>;------------------------------- </b><br>
+ <b class='r'>If</b> RepairBonus <> 0 <br>
+ &nbsp; <b class='r'>If</b> rep_b% = 0 <br>
+ &nbsp; &nbsp;rep_b% = RepairBonus <br>
+ &nbsp; <b class='r'>EndIf</b> <br>
+ <b class='r'>EndIf</b> <br>
+</td></tr></table>
+<br>
+<br>
+<h3>Собираем бонусы</h3>
+Теперь, если нам понадобится бонус, мы ищем его уже в собственных переменных и поворачиваем бот на них. Для поворота используем функцию <b>DeltaYaw</b>(<i>entity_1, entity_2</i>) 
+(возвращает угол по оси Y, на который нужно повернуть первый объект, чтобы он смотрел на второй ) :<br>
+<br>
+<table bgColor='#335588' width='100%'><tr><td>
+<b class=c>
+ <b class='m'>;------------------------------- </b><br>
+ <b class='r'>If</b> bullets < 10 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <b class='m'>; если у нас мало патронов </b><br>
+ &nbsp; <b class='r'>If</b> bul_b% <> 0 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <b class='m'>; если в переменной есть бонус </b><br>
+ &nbsp; &nbsp; TurnCorpus = <b class='r'>DeltaYaw</b> ( corpus%, bul_b% ) <b class='m'>; поворачиваем бот на бонус </b><br>
+ &nbsp; <b class='r'>EndIf</b> <br>
+ <b class='r'>EndIf</b> <br>
+ <b class='m'>;------------------------------- </b><br>
+ <b class='r'>If</b> rockets = 0 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<b class='m'>; если у нас нет ракет </b><br>
+ &nbsp; <b class='r'>If</b> roc_b% <> 0 <br>
+ &nbsp; &nbsp; TurnCorpus = <b class='r'>DeltaYaw</b> ( corpus%, roc_b% ) <br>
+ &nbsp; <b class='r'>EndIf</b> <br>
+ <b class='r'>EndIf</b> <br>
+ <b class='m'>;------------------------------- </b><br>
+ <b class='r'>If</b> MyLives < 5 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<b class='m'>; если наш бот сильно поврежден ( 10 жизней максимум ) </b><br>
+ &nbsp; <b class='r'>If</b> rep_b% <> 0 <br>
+ &nbsp; &nbsp; TurnCorpus = <b class='r'>DeltaYaw</b> ( corpus%,rep_b% ) <br>
+ &nbsp; <b class='r'>EndIf</b> <br>
+ <b class='r'>EndIf</b> <br>
+</b>
+</td></tr></table>
+<br>
+Приоритеты (какой бонус брать первым) сделайте сами, в зависимости от своей тактики боя.<br>
+Этот код поставьте сразу после сканирования радаром.<br><br>
+</body>

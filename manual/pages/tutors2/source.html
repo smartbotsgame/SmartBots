@@ -1,0 +1,128 @@
+<html>
+<head>
+<title>Исходный код</title>
+</head>
+<style>
+.c {color:#FFFFFF;font-weight:normal;font-family:courier;font-size:14;}
+.m {color:#FFFF00;font-weight:normal;}
+.r {color:#AAFFFF;font-weight:normal;}
+</style>
+<body>
+<h2>Исходный код.</h2>
+<table bgColor='#335588' width='100%'><tr><td>
+<b class=c>
+ i = i + 20 <br>
+ <b class='r'>If </b>i > 360 <br>
+ &nbsp; i = 0 <br>
+ <b class='r'>End</b><b class='r'>If </b><br>
+ <b class='r'>ScanRadar</b>(i) <br>
+ &nbsp;<br>
+ &nbsp;<b class='m'>;------------------------------- </b><br>
+ <b class='r'>If </b><b class='r'>BulletBonus</b> <> 0 <br>
+ &nbsp; <b class='r'>If </b>bul_b% = 0 <br>
+ &nbsp; &nbsp; bul_b% = <b class='r'>BulletBonus</b> <br>
+ &nbsp; <b class='r'>End</b><b class='r'>If </b><br>
+ <b class='r'>End</b><b class='r'>If </b><br>
+ &nbsp;<b class='m'>;------------------------------- </b><br>
+ <b class='r'>If </b><b class='r'>RocketBonus</b> <> 0 <br>
+ &nbsp; <b class='r'>If </b>roc_b% = 0 <br>
+ &nbsp; &nbsp;roc_b% = <b class='r'>RocketBonus</b> <br>
+ &nbsp; <b class='r'>End</b><b class='r'>If </b><br>
+ <b class='r'>End</b><b class='r'>If </b><br>
+ &nbsp;<b class='m'>;------------------------------- </b><br>
+ <b class='r'>If </b><b class='r'>RepairBonus</b> <> 0 <br>
+ &nbsp; <b class='r'>If </b>rep_b% = 0 <br>
+ &nbsp; &nbsp;rep_b% = <b class='r'>RepairBonus</b> <br>
+ &nbsp; <b class='r'>End</b><b class='r'>If </b><br>
+ <b class='r'>End</b><b class='r'>If </b><br>
+ &nbsp;<br>
+ &nbsp;<b class='m'>;------------------------------- </b><br>
+ <b class='r'>If </b><b class='r'> Bullets </b> < 10 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<b class='m'>; если у нас мало патронов </b><br>
+ <b class='r'>If </b>bul_b% <> 0 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<b class='m'>; если в переменной есть бонус </b><br>
+ &nbsp; <b class='r'>TurnCorpus</b> = <b class='r'>DeltaYaw</b> (<b class='r'> Corpus </b>, bul_b% ) &nbsp;<b class='m'>; поворачиваем бот на бонус </b><br>
+ <b class='r'>End</b><b class='r'>If </b><br>
+ <b class='r'>End</b><b class='r'>If </b><br>
+ &nbsp;<b class='m'>;------------------------------- </b><br>
+ <b class='r'>If </b><b class='r'> Rockets </b> = 0 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <b class='m'>; если у нас нет ракет </b><br>
+ <b class='r'>If </b>roc_b% <> 0 <br>
+ &nbsp; <b class='r'>TurnCorpus</b> = <b class='r'>DeltaYaw</b> (<b class='r'> Corpus </b>,roc_b% ) <br>
+ <b class='r'>End</b><b class='r'>If </b><br>
+ <b class='r'>End</b><b class='r'>If </b><br>
+ &nbsp;<b class='m'>;------------------------------- </b><br>
+ <b class='r'>If </b><b class='r'> MyLives </b> < 5 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <b class='m'>; если наш бот сильно поврежден </b><br>
+ <b class='r'>If </b>rep_b% <> 0 <br>
+ &nbsp; <b class='r'>TurnCorpus</b> = <b class='r'>DeltaYaw</b> (<b class='r'> Corpus </b>, rep_b% ) <br>
+ <b class='r'>End</b><b class='r'>If </b><br>
+ <b class='r'>End</b><b class='r'>If </b><br>
+ &nbsp;<br>
+ &nbsp;<br>
+ <b class='r'>If </b><b class='r'>Enemy</b> <> 0 &nbsp; &nbsp; &nbsp;<b class='m'>; если радар нашел врага </b><br>
+ &nbsp; <b class='r'>If </b>target% = 0 &nbsp; <b class='m'>; если наша переменная цели равна 0 </b><br>
+ &nbsp; &nbsp; target% = <b class='r'>Enemy</b> &nbsp; &nbsp;<b class='m'>; заносим врага в цель </b><br>
+ &nbsp; <b class='r'>End</b><b class='r'>If </b><br>
+ <b class='r'>End</b><b class='r'>If </b><br>
+ &nbsp;<br>
+ <b class='r'>If </b>target <> 0 <br>
+ &nbsp; dist_t = <b class='r'>EntityDistance</b> (<b class='r'> Corpus </b>, target ) <br>
+ &nbsp; ppr = dist_t# / 800 <br>
+ &nbsp; <b class='r'>TurnTurret</b> = <b class='r'>DeltaYaw</b> (<b class='r'> Turret </b>, target ) <br>
+ &nbsp; <b class='r'>If </b>abs ( <b class='r'>TurnTurret</b> ) < 10 <br>
+ &nbsp; &nbsp; <b class='r'>TurnGun</b> = <b class='r'>DeltaPitch</b> (<b class='r'> Gun </b>, target ) - ppr <br>
+ &nbsp; &nbsp; <b class='r'>If </b>abs ( <b class='r'>TurnGun</b> ) < 2 <br>
+ &nbsp; &nbsp; &nbsp; <b class='r'>Fire1 </b>= 1 <br>
+ &nbsp; &nbsp; <b class='r'>End</b><b class='r'>If </b><br>
+ &nbsp; <b class='r'>End</b><b class='r'>If </b><br>
+ &nbsp;<br>
+ &nbsp; <b class='r'>If </b>rockets > 0 <br>
+ &nbsp; &nbsp; <b class='r'>If </b>dist_t > 500 <br>
+ &nbsp; &nbsp; &nbsp; <b class='r'>TurnCorpus</b> = <b class='r'>DeltaYaw</b> (<b class='r'> Corpus </b>, target ) <br>
+ &nbsp; &nbsp; <b class='r'>End</b><b class='r'>If </b><br>
+ &nbsp; <b class='r'>End</b><b class='r'>If </b><br>
+ &nbsp;<br>
+ &nbsp; <b class='r'>If </b>dist_t < 600 <br>
+ &nbsp; &nbsp; <b class='r'>Fire2 </b>= 1 <br>
+ &nbsp; <b class='r'>End</b><b class='r'>If </b><br>
+ <b class='r'>End</b><b class='r'>If </b><br>
+ &nbsp;<br>
+ <b class='r'>ScanRadar</b> ( <b class='r'>CorpusYaw</b> ) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <b class='m'>;в переменной corpusyaw у нас содержится текущий угол бота по оси у </b><br>
+ <b class='r'>If </b>( <b class='r'>Obstacle</b> > 0 )<b class='r'> And </b>( <b class='r'>Obstacle</b> < 400 ) &nbsp;<b class='m'>; переменные obstacle содержит расстояние до препятствия, если оно есть </b><br>
+ &nbsp; turn_c = 20 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<b class='m'>; наша переменная принимает значение если расстояние меньше 40 метров, назовем ее счетчик </b><br>
+ &nbsp; oba = <b class='r'>ObsAngle</b> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<b class='m'>; в переменную oba запоминаем угол с этим препятствием относительно бота </b><br>
+ <b class='r'>End</b><b class='r'>If </b><br>
+ &nbsp;<b class='m'>;----------------------выполняем маневр </b><br>
+ <b class='r'>If </b>turn_c > 0 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<b class='m'>; если счетчик больше 0 </b><br>
+ &nbsp; turn_c = turn_c - 1 &nbsp; <b class='m'>; уменьшаем счетчик </b><br>
+ &nbsp; <b class='r'>TurnCorpus</b> = oba &nbsp; &nbsp;<b class='m'>;бот будет поворачиваться соответственно с углом между препятствием и ботом </b><br>
+ <b class='r'>End</b><b class='r'>If </b><br>
+ &nbsp;<br>
+ move=1 &nbsp; <b class='m'>; двигаем бота </b><br>
+ &nbsp;<b class='m'>;--------------------------------- </b><br>
+ <b class='r'>If CollidedObstacle</b><>0 <br>
+ &nbsp; <b class='r'>If </b>(turn_b1 = 0)<b class='r'> And </b>(turn_b2 = 0) <br>
+ &nbsp; &nbsp; turn_b1 = 60 <br>
+ &nbsp; <b class='r'>End</b><b class='r'>If </b><br>
+ <b class='r'>End</b><b class='r'>If </b><br>
+ &nbsp;<br>
+ <b class='r'>If </b>turn_b1 > 0 <br>
+ &nbsp; turn_b1 = turn_b1 - 1 <br>
+ &nbsp; <b class='r'>If </b>turn_b1 = 0 <br>
+ &nbsp; &nbsp; turn_b2 = 50 <br>
+ &nbsp; <b class='r'>End</b><b class='r'>If </b><br>
+ &nbsp; <b class='r'>Move </b>= -1 <br>
+ &nbsp; <b class='r'>If </b>turn_b1 < 40 <br>
+ &nbsp; &nbsp; <b class='r'>TurnCorpus</b> = -1 <br>
+ &nbsp; <b class='r'>End</b><b class='r'>If </b><br>
+ <b class='r'>End</b><b class='r'>If </b><br>
+ &nbsp;<br>
+ <b class='r'>If </b>turn_b2 > 0 <br>
+ &nbsp; turn_b2 = turn_b2 - 1 <br>
+ &nbsp; <b class='r'>Move </b>= 1 <br>
+ &nbsp; <b class='r'>TurnCorpus</b> = 1 <br>
+ <b class='r'>End</b><b class='r'>If </b><br>
+ &nbsp;<b class='m'>;================================ </b><br>
+ &nbsp;<br>
+</b>
+</td></tr></table>
+<br><Br>
+</body>
+</html>

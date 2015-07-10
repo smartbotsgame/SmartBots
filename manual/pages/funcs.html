@@ -1,0 +1,173 @@
+<html>
+<head>
+<link rel="stylesheet" href="tutors/style.css" type="text/css">
+</head>
+<body>
+<h2>Функции</h2>
+
+<h3>Работа с радаром</b>
+<table class='function' width=100%>
+<tR><td class='content'><b>ScanRadar (</b> <i>angle#</i> <b>)</b></td></tr>
+<tr><td class='content'>
+Сканирует пространство под углом <i>angle</i> безотносительно от направления движения бота.<br>
+Если, например, <i>angle</i>=0, то пространство сканируется все время в одном и том же направлении.<br>
+Область сканирования - сектор. При этом, препятствия  засекаются только по направлению "главного луча", а бонусы и другие боты - по всему сектору.<bR>
+<table class='function'><tr>
+<td><img src='radar.JPG'></tD>
+<td valign=top>
+<table>
+<tr><th valign=top>1 - </th><td>препятствие, засеченное радаром ( т.к. попал под "главный луч" ).</td></tr>
+<tr><th valign=top>2 - </th><td>препятствие, не засеченное радаром ( т.к. не попадает под "главный луч" ).</td></tr>
+<tr><th valign=top>3 - </th><td>бонус, засеченный радаром ( т.к. попал в сектор сканирования ).</td></tr>
+<tr><th valign=top width=20>4 - </th><td>"главный луч".</td></tr>
+</table>
+</td></tr></table>
+</td></tr>
+</table>
+<br>
+<table width='100%' class=function>
+<tr><td class='content'><b>PointRadar (</b> <i>entity%</i> <b>)</b></td></tr>
+<tr><td class='content'>Направляет радар на объект <i>entity</i> ( указатель ).</td></tr>
+</table>
+<br>
+<br>
+
+<h3>Работа с объектами</h3>
+<table width='100%' class=function>
+<tr><td class=content><b>EntityX (</b> <i>entity%</i> <b>)</b>, <b>EntityY (</b> <i>entity%</i> <b>)</b>, <b>EntityZ (</b> <i>entity%</i> <b>)</b></td></tr>
+<tr><td class=content>возвращает соответствующие координаты объекта в пространстве.</td></tr>
+</table>
+<table width='100%' class=function>
+<tr><td class=content><b>EntityPitch (</b> <i>entity%</i> <b>)</b>, <b>EntityYaw (</b> <i>entity%</i> <b>)</b>, <b>EntityRoll (</b> <i>entity%</i> <b>)</b></td></tr>
+<tr><td class=content>возвращает соответствующие углы объекта в пространстве.</td></tr>
+</table>
+<table width='100%' class=function>
+<tr><td class=content><b>EntityVisible (</b> <i>src_entity%</i>, <i>dest_entity%</i> <b>)</b></td></tr>
+<tr><td class=content>определяет видим ли один объект другим.</td></tr>
+</table>
+<table width='100%' class=function>
+<tr><td class=content><b>EntityDistance (</b> <i>src_entity%</i>, <i>dest_entity%</i> <b>)</b></td></tr>
+<tr><td class=content>возвращает расстояние между объектами.</td></tr>
+</table>
+<table width=100% class=function>
+<tr><td class=content><b>DeltaYaw (</b> <i>src_entity%, dest_entity%</i> <b>)</b></td></tr>
+<tr><td class=content>
+угол, на который надо повернуть объект <i>src_entity</i> по оси OY, чтобы направить его на <i>dest_entity</i>.<br>
+<table width=100% class=function>
+<tr>
+<td><img src='deltayaw.JPG'></td>
+<td>На рисунке <i>src_entity</i> - бот, движущийся по направлению вертикальной стрелки, <i>dest_entity</i> - некий объект.<br>
+Функция <b>DeltaYaw</b> возвращает угол "фи".</td>
+</tr>
+</table>
+</td></tr>
+</table>
+<table width=100% class=function>
+<tr><td class=content><b>DeltaPitch (</b> <i>src_entity%, dest_entity%</i> <b>)</b></td></tr>
+<tr><td class=content>
+угол, на который надо повернуть объект <i>src_entity</i> по оси OX, чтобы направить его на <i>dest_entity</i>.<br>
+<table width=100% class=function>
+<tr>
+<td><img src='deltapitch.JPG'></td>
+<td>На рисунке <i>src_entity</i> - это ствол бота, <i>dest_entity</i> - некий объект.<bR>
+Функция <b>DeltaPitch</b> возвращает угол "лямбда".</td>
+</tr>
+</table>
+</td></tr>
+</table>
+<table width='100%' class=function>
+<tr><td class=content><b>PositionPivot (</b> <i>x#, y#, z#</i> <b>)</b></td></tr>
+<tr><td class=content>позиционировать виртуальную точку <b>Pivot</b> в заданные координаты.</td></tr>
+</table>
+
+<table width='100%' class=function>
+<tr><td class=content><b>TypeEntity(</b> <i>entity</i> <b>)</b></td></tr>
+<tr><td class=content>возвращает тип объекта. Враг 1, Друг 2, Препятствие 3-4, Снаряды 5, Ракеты 6, Ремонт 7 </td></tr>
+</table>
+
+<table width='100%' class=function>
+<tr><td class=content><b>Lives(</b> <i>bot</i> <b>)</b></td></tr>
+<tr><td class=content>возвращает количество жизней бота (в том числе и вражеских) </td></tr>
+</table>
+<br>
+<br>
+
+<h3>Работа с коллизиями ( столкновениями )</h3>
+<table width='100%' class=function>
+<tr><td class=content><b>CollisionX (</b> <i>entity%</i> <b>)</b>, <b>CollisionY (</b> <i>entity%</i> <b>)</b>, <b>CollisionZ (</b> <i>entity%</i> <b>)</b></td></tr>
+<tr><td class=content>возвращает соответствующую координату последнего места столкновения объекта.</td></tr>
+</table>
+<table width='100%' class=function>
+<tr><td class=content><b>CollisionNX (</b> <i>entity%</i> <b>)</b>, <b>CollisionNY (</b> <i>entity%</i> <b>)</b>, <b>CollisionNZ (</b> <i>entity%</i> <b>)</b></td></tr>
+<tr><td class=content>возвращает соответствующую компоненту нормали последнего места столкновения объекта.</td></tr>
+</table>
+<br>
+<br>
+<h3>Математика</h3>
+<table width='100%' class=function>
+<tr><td class=content><b>Abs (</b> <i>x#</i> <b>)</b></td></tr>
+<tr><td class=content>возвращает модуль числа <i>x#</i>.</td></tr>
+</table>
+<table width='100%' class=function>
+<tr><td class=content><b>Sqr (</b> <i>x#</i> <b>)</b></td></tr>
+<tr><td class=content>возвращает квадратный корень числа <i>x#</i>.</td></tr>
+</table>
+<table width='100%' class=function>
+<tr><td class=content><b>Sgn (</b> <i>x#</i> <b>)</b></td></tr>
+<tr><td class=content>возвращает знак числа <i>x#</i>.</td></tr>
+</table>
+<table width='100%' class=function>
+<tr><td class=content><b>Sin (</b> <i>x#</i> <b>)</b></td></tr>
+<tr><td class=content>возвращает синус угла <i>x#</i>.</td></tr>
+</table>
+<table width='100%' class=function>
+<tr><td class=content><b>Cos (</b> <i>x#</i> <b>)</b></td></tr>
+<tr><td class=content>возвращает косинус угла <i>x#</i>.</td></tr>
+</table>
+<table width='100%' class=function>
+<tr><td class=content><b>ASin (</b> <i>x#</i> <b>)</b></td></tr>
+<tr><td class=content>возвращает арксинус числа <i>x#</i>.</td></tr>
+</table>
+<table width='100%' class=function>
+<tr><td class=content><b>ACos (</b> <i>x#</i> <b>)</b></td></tr>
+<tr><td class=content>возвращает арккосинус числа <i>x#</i>.</td></tr>
+</table>
+<table width='100%' class=function>
+<tr><td class=content><b>Min (</b> <i>a#</i>, <i>b#</i> <b>)</b></td></tr>
+<tr><td class=content>возвращает минимальное число.</td></tr>
+</table>
+<table width='100%' class=function>
+<tr><td class=content><b>Max (</b> <i>a#</i>, <i>b#</i> <b>)</b></td></tr>
+<tr><td class=content>возвращает максимальное число.</td></tr>
+</table>
+<table width='100%' class=function>
+<tr><td class=content><b>Rnd (</b> <i>a#</i>, <i>b#</i> <b>)</b></td></tr>
+<tr><td class=content>возвращает случайное дробное число.</td></tr>
+</table>
+<table width='100%' class=function>
+<tr><td class=content><b>Rand (</b> <i>a#</i>, <i>b#</i> <b>)</b></td></tr>
+<tr><td class=content>возвращает случайное целое число.</td></tr>
+</table>
+<table width='100%' class=function>
+<tr><td class=content><b>ATan2 (</b> <i>x#</i>, <i>y#</i> <b>)</b></td></tr>
+<tr><td class=content>возвращает угол от оси OY до точки (<i>x, y</i>). В левой полуплоскости от оси OY значения <b>Atan2</b> отрицательные, в правой - положительные.<br>
+<table width=100%>
+<tr><td><img src='atan2.JPG'></td>
+<td valign=top><b>Atan2</b>(10, 10) = 45<br><b>Atan2</b>(-10, -3) = -106.699
+</tR>
+</table>
+Эта функция крайне полезна, когда есть два обьекта, и нужно повернуть один к другому. :
+<table width=100% class=code>
+<tr><td>
+<b class=c>
+<b class=r>ATan2</b> ( y2-y1, x2-x1 )
+</b>
+</td></tr>
+</table>
+ выдаст правильную ориентацию для объекта 1 ( c координатами (<i>x1, y1</i>) ), чтобы он был направлен на объект 2 ( c координатами (<i>x2, y2</i>) ).
+</td></tr>
+</table>
+
+
+</body>
+</html>
